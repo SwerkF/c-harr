@@ -69,7 +69,7 @@ function App() {
 
         <div className="mt-8 text-xs text-gray-500">
           <p>Vos larmes sont sauvegardées localement dans votre navigateur</p>
-          <p>Bon courage !</p>
+          <p>Bon courage ! 💪</p>
         </div>
       </div>
     </div>
