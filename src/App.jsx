@@ -1,52 +1,75 @@
-import { useState } from 'react'
+ import { useState, useEffect } from 'react'
 
 function App() {
   const [count, setCount] = useState(0)
 
+  // Charger le compteur depuis localStorage au démarrage
+  useEffect(() => {
+    const savedCount = localStorage.getItem('c-harr-click-count')
+    if (savedCount) {
+      setCount(parseInt(savedCount, 10))
+    }
+  }, [])
+
+  // Sauvegarder le compteur dans localStorage à chaque changement
+  useEffect(() => {
+    localStorage.setItem('c-harr-click-count', count.toString())
+  }, [count])
+
+  const handleClick = () => {
+    setCount(prevCount => prevCount + 1)
+  }
+
+  const resetCount = () => {
+    setCount(0)
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-8">
+    <div className="min-h-screen bg-white flex items-center justify-center px-4">
+      <div className="max-w-2xl mx-auto text-center">
+        <div className="mb-12">
+          <h1 className="text-6xl font-bold text-black mb-6">
             C-Harr ⭐
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
+          <p className="text-2xl text-gray-700 mb-8">
             Quand c'est harr, faut lâcher une larme 🥲
           </p>
+        </div>
+        
+        <div className="bg-gray-100 border-2 border-black rounded-lg p-8 mb-8 shadow-lg">
+          <h2 className="text-3xl font-semibold text-black mb-6">
+            Compteur de larmes
+          </h2>
           
-          <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-              React + Vite + Tailwind
-            </h2>
+          <div className="mb-8">
+            <div className="text-8xl font-bold text-black mb-4">
+              {count}
+            </div>
+            <p className="text-lg text-gray-600">
+              {count === 0 ? 'Aucun clic' : count === 1 ? '1 clic enregistré' : `${count} clics enregistrés`}
+            </p>
+          </div>
+          
+          <div className="flex flex-col sm:justify-center gap-4">
+            <button 
+              onClick={handleClick}
+              className="bg-black hover:bg-gray-800 text-white font-medium py-4 px-8 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg w-full sm:w-auto"
+            >
+              Cliquez ici ! 👆
+            </button>
             
-            <div className="space-y-4">
-              <button 
-                onClick={() => setCount((count) => count + 1)}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg"
-              >
-                Compteur: {count}
-              </button>
-              
-              <p className="text-gray-600">
-                Modifiez <code className="bg-gray-100 px-2 py-1 rounded text-sm">src/App.jsx</code> et sauvegardez pour tester le HMR
-              </p>
-            </div>
+            <button 
+              onClick={resetCount}
+              className="bg-red-500 hover:bg-red-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg w-full sm:w-auto"
+            >
+              Reset 🔄
+            </button>
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-lg p-6 shadow-md">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">⚡ Vite</h3>
-              <p className="text-gray-600 text-sm">Build tool rapide et moderne</p>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-md">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">⚛️ React</h3>
-              <p className="text-gray-600 text-sm">Bibliothèque UI populaire</p>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-md">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">🎨 Tailwind</h3>
-              <p className="text-gray-600 text-sm">Framework CSS utilitaire</p>
-            </div>
-          </div>
+        <div className="mt-8 text-xs text-gray-500">
+          <p>Vos larmes sont sauvegardées localement dans votre navigateur</p>
+          <p>Bon courage !</p>
         </div>
       </div>
     </div>
