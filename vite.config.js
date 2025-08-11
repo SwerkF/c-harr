@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: '/c-harr/', // Nom de votre repository GitHub
+  base: '/', // Domaine personnalisé = racine
   build: {
     outDir: 'dist',
     sourcemap: true,

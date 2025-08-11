@@ -41,7 +41,8 @@ Ce projet utilise deux workflows GitHub Actions pour gérer le CI/CD :
 ### Dans votre repository GitHub :
 1. **Settings** → **Pages**
 2. **Source** : GitHub Actions
-3. **Permissions** : Activer les GitHub Actions
+3. **Custom domain** : `c-harr.com` (si configuré)
+4. **Permissions** : Activer les GitHub Actions
 
 ### Variables d'environnement :
 - Aucune variable custom requise
